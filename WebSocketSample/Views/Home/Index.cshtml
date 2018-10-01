@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<h1> Welcome to Web Sockets Demo</h1>
+
+<div class="form-group">
+    <label>Web Socker Server URL: </label>
+    <input id="wsEndpoint" type="text" />
+</div>
+<button id="connect" class="btn btn-default">Connect to Web Socket</button>
+<button id="disconnect" class="btn btn-default">Disconnect</button>
+
+<br />
+<br />
+
+<div id="status" class="alert alert-danger" role="alert">
+    Disconnected!
+</div>
+
+<div>
+    <h2>Messages</h2>
+
+    <div>
+        <label>Your Message: </label>
+        <input id="message" type="text" />
+        <button id="send" class="btn btn-default">Send</button>
+    </div>
+
+    <h3>History</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td scope="col">From</td>
+                <td scope="col">To</td>
+                <td scope="col">Message</td>
+                <td scope="col">Time Stamp</td>
+            </tr>
+        </thead>
+        <tbody id="messages">
+        </tbody>
+    </table>
+</div>

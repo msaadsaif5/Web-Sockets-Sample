@@ -35,6 +35,12 @@ document.getElementById("connect").addEventListener("click", function () {
 
 document.getElementById("send").addEventListener("click", function () {
     var msg = document.getElementById("message").value;
+
+    if (!msg || msg == "") {
+        alert('Please enter your message');
+        return;
+    }
+
     if (!socket || socket.readyState != WebSocket.OPEN) {
         alert('Socker not connected');
         return;

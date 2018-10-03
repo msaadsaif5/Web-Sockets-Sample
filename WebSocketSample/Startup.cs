@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using WebSocketSample.Infrastructure;
 using WebSocketSample.Middleware;
 
 namespace WebSocketSample
@@ -52,7 +48,14 @@ namespace WebSocketSample
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseWebSocketEcho("/ws", new WebSocketOptions { KeepAliveInterval = TimeSpan.FromSeconds(120), ReceiveBufferSize = 4 * 1024 })
+            var textSubProtocol = new TextSubProtocol();
+            var wsConnectionOptions = new WebSocketConnectionOptions
+            {
+                DefaultProtocol = textSubProtocol,
+                SupportedProtocols = new List<ISubProtocol> { textSubProtocol, new JsonSubProtocol() }
+            };
+
+            app.UseWebSocketEcho("/ws", wsConnectionOptions)
                .UseMvc(routes =>
                 {
                     routes.MapRoute(

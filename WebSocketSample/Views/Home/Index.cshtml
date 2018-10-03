@@ -5,10 +5,20 @@
 
 <h1> Welcome to Web Sockets Demo</h1>
 
-<div class="form-group">
+<div>
     <label>Web Socket Server URL: </label>
     <input id="wsEndpoint" type="text" />
+    <br />
+
+    <label>Sub protocol(s): </label>
+    <br />
+    <input id="wstext" type="checkbox" checked="checked"/>
+    <label for="wstext">ws.text</label>
+    <br />
+    <input id="wsjson" type="checkbox" checked="checked"/>
+    <label for="wsjson">ws.json</label>
 </div>
+
 <button id="connect" class="btn btn-default">Connect to Web Socket</button>
 <button id="disconnect" class="btn btn-default">Disconnect</button>
 
@@ -29,7 +39,8 @@
     </div>
 
     <h3>History</h3>
-    <table class="table table-striped">
+
+    <table id="historyTable" class="table table-striped">
         <thead>
             <tr>
                 <td scope="col">From</td>
@@ -38,7 +49,9 @@
                 <td scope="col">Time Stamp</td>
             </tr>
         </thead>
-        <tbody id="messages">
-        </tbody>
+        <tbody id="messages"></tbody>
     </table>
+
+    <button id="purge" class="btn-warning">Purge history</button>
+
 </div>
